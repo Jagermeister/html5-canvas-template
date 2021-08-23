@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>html5 canvas template</title>
+    <link rel="stylesheet" href="source/styles/index.css">
+    <script src='./source/canvas.js' type='text/javascript'></script>
+  </head>
+<body>
+  <div id="canvasContainer"></div>
+  <script type="text/javascript">
+    'use strict';
+    const canvas_width = 1080,
+        canvas_height = 720,
+        dimensions = { width: canvas_width, height: canvas_height };
+
+    var canvas = utility.canvasCreate("canvasContainer", "canvasLayerId", dimensions);
+    var ctx = canvas.getContext("2d");
+
+    let fontSize = 20;
+
+    var keyDownEvents = {};
+    function init() {
+      keyDownEvents = {
+        32: () => { console.log("you pressed SPACEBAR!")},
+        77: () => { console.log("you pressed the letter M!")},
+      };
+
+      ctx.font = fontSize + 'px Courier New';
+    }
+
+    canvas.addEventListener("mousedown", (event) => {
+      const [x, y] = utility.xyFromMouse(canvas, event);
+      console.log(`you clicked at (${x}, ${y})`);
+    });
+
+    window.addEventListener("keydown", (event) => {
+      const f = keyDownEvents[event.keyCode.toString()];
+      f && f();
+    });
+
+    function display() {
+      ctx.clearRect(0, 0, dimensions.width, dimensions.height);
+      ctx.strokeStyle = '#F0F8FF';
+      utility.strokeText(ctx, "Hello World!", 200, 150);
+    }
+
+    window.onload = () => {
+      init();
+      display();
+    }
+  </script>
+</body>
+</html>
