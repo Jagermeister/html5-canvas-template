@@ -1,0 +1,26 @@
+{
+  "name": "html5-canvas-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jagermeister/html5-canvas-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jagermeister/html5-canvas-template/issues"
+  },
+  "homepage": "https://github.com/Jagermeister/html5-canvas-template#readme",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}
