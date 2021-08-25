@@ -3,19 +3,21 @@
     <title>html5 canvas template</title>
     <link rel="stylesheet" href="source/styles/index.css">
     <script src='./source/canvas.js' type='text/javascript'></script>
+    <script src='./source/entity/bouncer.js' type='text/javascript'></script>
   </head>
 <body>
   <div id="canvasContainer"></div>
   <script type="text/javascript">
     'use strict';
-    const canvas_width = 1080,
-        canvas_height = 720,
+    const canvas_width =720,
+        canvas_height = 540,
         dimensions = { width: canvas_width, height: canvas_height };
 
     var canvas = utility.canvasCreate("canvasContainer", "canvasLayerId", dimensions);
     var ctx = canvas.getContext("2d");
 
-    let fontSize = 20;
+    let fontSize = 20,
+      framesPerSecond = null;
 
     var keyDownEvents = {};
     function init() {
@@ -37,15 +39,37 @@
       f && f();
     });
 
+    const helloWorld = Object.assign({}, bouncer);
+
+    function update(delta) {
+      const fps = parseInt(1_000 / delta);
+      if (framesPerSecond != fps) {
+        framesPerSecond = fps;
+      }
+
+      helloWorld.update(delta);
+    }
+
     function display() {
       ctx.clearRect(0, 0, dimensions.width, dimensions.height);
       ctx.strokeStyle = '#F0F8FF';
       utility.strokeText(ctx, "Hello World!", 200, 150);
+
+      const rightAligned = true;
+      utility.strokeText(ctx, `FPS: ${framesPerSecond}`, dimensions.width, fontSize, rightAligned);
+
+      helloWorld.display(ctx);
     }
 
     window.onload = () => {
-      init();
-      display();
+			init();
+			var mainloop_updateLast = performance.now();
+			(function mainLoop(nowTime) {
+				update(nowTime - mainloop_updateLast);
+				display();
+				mainloop_updateLast = nowTime;
+				requestAnimationFrame(mainLoop);
+			})(performance.now());
     }
   </script>
 </body>

@@ -3,4 +3,5 @@
 Personal starting point for HTML5 Canvas projects.
 
 ## Features
-- Basic one-time canvas painting
+- Continous drawing via `requestAnimationFrame`
+- Entity object uses event loop -> Update, Display
