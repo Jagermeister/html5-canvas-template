@@ -1,38 +1,46 @@
+"use strict";
+class Bouncer extends Entity {
+  constructor(text, container) {
+    super(5, 20, 1, 1);
+    this.text = text;
+    this.velocityPerSecond = 240;
+    this.width = 0;
+    this.height = 20;
+    this.dimensions = container;
+  }
+  
+  isXOutOfBounds() {
+    return this.x < 0 || (this.x + this.width) > this.dimensions.width;
+  }
 
-const bouncer = {
-  text: "Hello World!",
-  velocityPerSecond: 240,
-  x: 5,
-  dx: 1,
-  width: 0,//,
-  y: 20,
-  dy: 1,
-  height: 20,
-  display: (ctx) => {
-    if (bouncer.width === 0) {
-      bouncer.width = ctx.measureText(bouncer.text).width
-    }
+  isYOutOfBounds() {
+    return (this.y - this.height) < 0 || this.y > this.dimensions.height;
+  }
 
-    utility.strokeText(ctx, bouncer.text, bouncer.x, bouncer.y);
-  },
-  isXOutOfBounds: () => bouncer.x < 0 || (bouncer.x + bouncer.width) > dimensions.width,
-  isYOutOfBounds: () => (bouncer.y - bouncer.height) < 0 || bouncer.y > dimensions.height,
-  update: (delta) => {
+  update(delta) {
     const percentageOfSecond = delta / 1_000;
-    const velocity = percentageOfSecond * bouncer.velocityPerSecond;
+    const velocity = percentageOfSecond * this.velocityPerSecond;
 
-    const xVelocity = velocity % (dimensions.width / 2);
-    bouncer.x += xVelocity * bouncer.dx;
-    if (bouncer.isXOutOfBounds()) {
-      bouncer.dx *= -1;
-      bouncer.x += bouncer.dx * (xVelocity * 2);
+    const xVelocity = velocity % (this.dimensions.width / 2);
+    this.x += xVelocity * this.dx;
+    if (this.isXOutOfBounds()) {
+      this.dx *= -1;
+      this.x += this.dx * (xVelocity * 2);
     }
 
-    const yVelocity = velocity % (dimensions.height / 2);
-    bouncer.y += yVelocity * bouncer.dy;
-    if (bouncer.isYOutOfBounds()) {
-      bouncer.dy *= -1;
-      bouncer.y += bouncer.dy * (yVelocity * 2);
+    const yVelocity = velocity % (this.dimensions.height / 2);
+    this.y += yVelocity * this.dy;
+    if (this.isYOutOfBounds()) {
+      this.dy *= -1;
+      this.y += this.dy * (yVelocity * 2);
     }
+  }
+
+  display(ctx) {
+    if (this.width === 0) {
+      this.width = ctx.measureText(this.text).width
+    }
+
+    utility.strokeText(ctx, this.text, this.x, this.y);
   }
 };

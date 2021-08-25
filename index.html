@@ -3,13 +3,14 @@
     <title>html5 canvas template</title>
     <link rel="stylesheet" href="source/styles/index.css">
     <script src='./source/canvas.js' type='text/javascript'></script>
+    <script src='./source/entity/entity.js' type='text/javascript'></script>
     <script src='./source/entity/bouncer.js' type='text/javascript'></script>
   </head>
 <body>
   <div id="canvasContainer"></div>
   <script type="text/javascript">
     'use strict';
-    const canvas_width =720,
+    const canvas_width = 720,
         canvas_height = 540,
         dimensions = { width: canvas_width, height: canvas_height };
 
@@ -39,7 +40,7 @@
       f && f();
     });
 
-    const helloWorld = Object.assign({}, bouncer);
+    const helloWorld = new Bouncer("Hello World!", dimensions);
 
     function update(delta) {
       const fps = parseInt(1_000 / delta);
