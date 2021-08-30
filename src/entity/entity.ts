@@ -1,4 +1,4 @@
-import { RenderContext } from "../canvas/canvasManager";
+import { RenderContext } from "../canvas/renderContext";
 
 export interface Point {
   x: number,

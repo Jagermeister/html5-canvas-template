@@ -1,5 +1,3 @@
-import { Dimension, Point } from "./entity/entity";
-
 export class utility {
 
   static getParameterByName = (name) => {
