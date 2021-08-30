@@ -10,13 +10,13 @@ export class EntityMovable extends Entity {
   velocity: IVelocity;
   velocityPerSecond: number;
   
-
   constructor(location: Point, dimensions: Dimension, container: Dimension, velocity: IVelocity) {
     super(location, dimensions, container);
     this.velocity = velocity;
   }
 
   update(delta: number) {
+    super.update(delta);
     const percentageOfSecond = delta / 1_000;
     const velocity = percentageOfSecond * this.velocityPerSecond;
 
@@ -33,9 +33,5 @@ export class EntityMovable extends Entity {
       this.velocity.dy *= -1;
       this.location.y += this.velocity.dy * (yVelocity * 2);
     }
-  }
-
-  display(ctx: RenderContext) {
-
   }
 }
