@@ -1,6 +1,6 @@
-import { Dimension, Point } from '../entity/entity';``
+import { Dimension, Entity, Point } from '../entity/entity';``
 
-class RenderContext {
+export class RenderContext {
   context: CanvasRenderingContext2D;
   dimensions: Dimension;
   fontSize: number = 20;
@@ -43,6 +43,8 @@ export class Canvas {
   context: RenderContext;
   isDrawing: boolean = true;
 
+  entities: Entity[] = [];
+
   constructor(canvasElement: HTMLCanvasElement, dimensions: Dimension) {
     this.nativeElement = canvasElement;
     this.dimensions = dimensions;
@@ -76,11 +78,18 @@ export class Canvas {
     this.nativeElement.setAttribute('height', dimensions.height.toString());
   }
 
-  update(delta: number) { }
+  update(delta: number) {
+    for(let i = 0; i < this.entities.length; i++) {
+      this.entities[i].update(delta);
+    }
+  }
 
   display() {
     this.context.clear()
     this.context.strokeText("asdf", { x: 100, y: 100 });
+    for(let i = 0; i < this.entities.length; i++) {
+      this.entities[i].display(this.context);
+    }
   }
 }
 
