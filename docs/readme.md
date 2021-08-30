@@ -13,8 +13,8 @@ We use [TypeScript](https://www.typescriptlang.org/) and compile to [JavaScript]
 ## Template
 To use the repository as a template, you can add remote template and merge updates.
 
-`git remote add template [URL of the template repo]`
+`git remote add template https://github.com/Jagermeister/html5-canvas-template.git`
 
 `git fetch --all`
 
-`git merge template/main`
+`git merge template/main --allow-unrelated-histories`
