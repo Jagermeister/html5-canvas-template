@@ -51,8 +51,7 @@ export class Canvas {
   }
 
   display() {
-    this.context.clear()
-    this.context.strokeText("asdf", { x: 100, y: 100 });
+    this.context.clear();
     for(let i = 0; i < this.entities.length; i++) {
       this.entities[i].display(this.context);
     }
