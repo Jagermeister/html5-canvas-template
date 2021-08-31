@@ -3,5 +3,9 @@ body {
 }
 
 canvas {
+  position: absolute;
+}
+
+canvas:first-child {
   background-color: rgb(130, 187, 236);
 }

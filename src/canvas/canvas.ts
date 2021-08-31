@@ -26,7 +26,7 @@ export class Canvas {
     const c = document.createElement('CANVAS');
     c.id = id;
     c.oncontextmenu = () => { return false; };
-    container.appendChild(c);
+    container.insertBefore(c, container.firstChild);
 
     const canvas = new this(c as HTMLCanvasElement, dimensions);
     canvas.containerId = containerId;
@@ -42,6 +42,12 @@ export class Canvas {
     this._dimensions = dimensions;
     this.nativeElement.setAttribute('width', dimensions.width.toString());
     this.nativeElement.setAttribute('height', dimensions.height.toString());
+  }
+
+  handleMouseEvent(event: MouseEvent): boolean {
+    // return true when event has been handled and should
+    // not be deleted to further canvas layers.
+    return false;
   }
 
   update(delta: number) {

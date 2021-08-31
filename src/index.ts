@@ -4,8 +4,10 @@ import { Canvas } from "./canvas/canvas";
 const canvasManager = new CanvasManager();
 
 function init() {
-  const dimensions = { width: 720, height: 540 };
-  canvasManager.add("canvasLayerId", Canvas.create("canvasContainer", "canvasLayerId", dimensions));
+  const dimensions = { width: 720, height: 540 },
+    containerId = 'canvasContainer';
+  canvasManager.init(containerId, dimensions);
+  canvasManager.add("canvasLayerId", Canvas.create(containerId, "canvasLayerId", dimensions));
 }
 
 window.onload = () => {
